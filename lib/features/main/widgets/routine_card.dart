@@ -51,12 +51,13 @@ class _RoutineCardState extends State<RoutineCard> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                IconButton(
+                TextButton(
                   onPressed: () {},
-                  icon: FaIcon(
-                    FontAwesomeIcons.trash,
-                    size: Sizes.size20,
-                    color: Colors.red.shade700,
+                  child: Text(
+                    "삭제하기",
+                    style: TextStyle(
+                      color: Colors.red.shade700,
+                    ),
                   ),
                 ),
                 IconButton(

@@ -35,20 +35,20 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
       ),
       Offstage(
         offstage: _selectedIndex != 1,
-        child: Container(),
+        child: const TimerScreen(),
       ),
       Offstage(
         offstage: _selectedIndex != 2,
-        child: const TimerScreen(),
+        child: Container(),
       ),
       Offstage(
         offstage: _selectedIndex != 3,
         child: Container(),
       ),
-      Offstage(
-        offstage: _selectedIndex != 4,
-        child: Container(),
-      ),
+      // Offstage(
+      //   offstage: _selectedIndex != 4,
+      //   child: Container(),
+      // ),
     ]);
   }
 
@@ -70,22 +70,22 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         ),
         BottomNavigationBarItem(
           icon: FaIcon(
+            FontAwesomeIcons.clock,
+          ),
+          label: "타이머",
+        ),
+        BottomNavigationBarItem(
+          icon: FaIcon(
             FontAwesomeIcons.calendarCheck,
           ),
           label: "달력",
         ),
-        BottomNavigationBarItem(
-          icon: FaIcon(
-            FontAwesomeIcons.clock,
-          ),
-          label: "운동",
-        ),
-        BottomNavigationBarItem(
-          icon: FaIcon(
-            FontAwesomeIcons.comments,
-          ),
-          label: "커뮤니티",
-        ),
+        // BottomNavigationBarItem(
+        //   icon: FaIcon(
+        //     FontAwesomeIcons.comments,
+        //   ),
+        //   label: "커뮤니티",
+        // ),
         BottomNavigationBarItem(
           icon: FaIcon(
             FontAwesomeIcons.user,
