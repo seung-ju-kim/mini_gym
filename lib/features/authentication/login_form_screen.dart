@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:minigym/constants/gaps.dart';
 import 'package:minigym/constants/sizes.dart';
 import 'package:minigym/features/authentication/widgets/form_button.dart';
+import 'package:minigym/features/navigation/main_navigation_screen.dart';
 
 class LoginFormScreen extends StatefulWidget {
   const LoginFormScreen({super.key});
@@ -14,18 +16,34 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   Map<String, String> formData = {};
 
-  void _onSubmitTap() {
+  void _onSubmitTap() async {
     if (_formKey.currentState != null) {
       if (_formKey.currentState!.validate()) {
         _formKey.currentState!.save();
-        Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(
-              builder: (context) => Container(),
-            ), (route) {
-          return false;
-        });
+
+        try {
+          UserCredential userCredential =
+              await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: formData['email']!,
+            password: formData['password']!,
+          );
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                builder: (context) => (const MainNavigationScreen()),
+              ), (route) {
+            return false;
+          });
+        } on FirebaseAuthException catch (e) {
+          if (e.code == 'user-not-found') {
+            print('No user found for that email.');
+          } else if (e.code == 'wrong-password') {
+            print('Wrong password provided for that user.');
+          }
+        }
       }
     }
+
+    await FirebaseAuth.instance.setPersistence(Persistence.NONE);
   }
 
   @override
@@ -71,6 +89,8 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                 ),
                 Gaps.v16,
                 TextFormField(
+                  obscureText: true,
+                  onEditingComplete: _onSubmitTap,
                   decoration: InputDecoration(
                     hintText: "비밀번호",
                     enabledBorder: UnderlineInputBorder(

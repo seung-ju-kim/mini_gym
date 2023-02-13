@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:minigym/features/main/routine_screen.dart';
+import 'package:minigym/features/profile/profile_screen.dart';
 import 'package:minigym/features/timer/timer_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
@@ -16,6 +18,16 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   void _onTap(int index) {
     setState(() {
       _selectedIndex = index;
+    });
+  }
+
+  void _auth() {
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user == null) {
+        print('User is currently signed out!');
+      } else {
+        print('User is signed in!');
+      }
     });
   }
 
@@ -43,7 +55,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
       ),
       Offstage(
         offstage: _selectedIndex != 3,
-        child: Container(),
+        child: const ProfileScreen(),
       ),
       // Offstage(
       //   offstage: _selectedIndex != 4,

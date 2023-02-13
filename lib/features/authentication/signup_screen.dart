@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:minigym/constants/gaps.dart';
 import 'package:minigym/constants/sizes.dart';
+import 'package:minigym/features/authentication/email_screen.dart';
 import 'package:minigym/features/authentication/login_screen.dart';
-import 'package:minigym/features/authentication/username_screen.dart';
 import 'package:minigym/features/authentication/widgets/auth_button.dart';
 
 class SignupScreen extends StatelessWidget {
@@ -20,18 +20,16 @@ class SignupScreen extends StatelessWidget {
   void _onEmailTap(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => const UsernameScreen(),
+        builder: (context) => const EmailScreen(),
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: getBody(context),
-        bottomNavigationBar: getBottomNavigationBar(context),
-      ),
+    return Scaffold(
+      body: getBody(context),
+      bottomNavigationBar: getBottomNavigationBar(context),
     );
   }
 
@@ -42,7 +40,10 @@ class SignupScreen extends StatelessWidget {
         Gaps.v80,
         const Text(
           "미니짐에 오신 것을 환영합니다.",
-          style: TextStyle(fontSize: Sizes.size24, fontWeight: FontWeight.w700),
+          style: TextStyle(
+            fontSize: Sizes.size24,
+            fontWeight: FontWeight.w700,
+          ),
         ),
         Gaps.v20,
         const Text(
@@ -73,7 +74,7 @@ class SignupScreen extends StatelessWidget {
   BottomAppBar getBottomNavigationBar(BuildContext context) {
     return BottomAppBar(
       color: Colors.grey.shade50,
-      elevation: 2,
+      elevation: 0,
       child: Padding(
         padding: const EdgeInsets.symmetric(
           vertical: Sizes.size20,

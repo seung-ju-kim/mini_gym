@@ -1,11 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:minigym/constants/sizes.dart';
+import 'package:minigym/features/authentication/signup_screen.dart';
 import 'package:minigym/features/navigation/main_navigation_screen.dart';
+import 'package:minigym/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MiniGymApp());
 }
 
@@ -32,6 +37,15 @@ class MiniGymApp extends StatelessWidget {
             bottomAppBarTheme: BottomAppBarTheme(
               color: Colors.grey.shade50,
             )),
-        home: const MainNavigationScreen());
+        home: StreamBuilder(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return const MainNavigationScreen();
+            } else {
+              return const SignupScreen();
+            }
+          },
+        ));
   }
 }

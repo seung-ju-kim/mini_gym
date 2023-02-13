@@ -5,7 +5,9 @@ import 'package:minigym/features/authentication/password_screen.dart';
 import 'package:minigym/features/authentication/widgets/form_button.dart';
 
 class EmailScreen extends StatefulWidget {
-  const EmailScreen({super.key});
+  const EmailScreen({
+    super.key,
+  });
 
   @override
   State<EmailScreen> createState() => _EmailScreenState();
@@ -32,8 +34,12 @@ class _EmailScreenState extends State<EmailScreen> {
 
   void _onSubmit() {
     if (_email.isEmpty || _isEmailValid() != null) return;
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const PasswordScreen()));
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => PasswordScreen(
+                  email: _email,
+                )));
   }
 
   @override

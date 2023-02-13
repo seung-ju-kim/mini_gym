@@ -22,11 +22,9 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: getBody(context),
-        bottomNavigationBar: getBottomNavigationBar(context),
-      ),
+    return Scaffold(
+      body: getBody(context),
+      bottomNavigationBar: getBottomNavigationBar(context),
     );
   }
 
