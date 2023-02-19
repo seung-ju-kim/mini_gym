@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:minigym/features/calendar/calendar_screen.dart';
 import 'package:minigym/features/main/routine_screen.dart';
 import 'package:minigym/features/profile/profile_screen.dart';
 import 'package:minigym/features/timer/timer_screen.dart';
@@ -13,7 +14,20 @@ class MainNavigationScreen extends StatefulWidget {
 }
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
+  final _authentication = FirebaseAuth.instance;
   int _selectedIndex = 0;
+  User? loggedUser;
+
+  void getCurrentUser() {
+    try {
+      final user = _authentication.currentUser;
+      if (user != null) {
+        loggedUser = user;
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 
   void _onTap(int index) {
     setState(() {
@@ -21,14 +35,15 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     });
   }
 
-  void _auth() {
-    FirebaseAuth.instance.authStateChanges().listen((User? user) {
-      if (user == null) {
-        print('User is currently signed out!');
-      } else {
-        print('User is signed in!');
-      }
-    });
+  @override
+  void initState() {
+    super.initState();
+    getCurrentUser();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -43,7 +58,9 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     return Stack(children: [
       Offstage(
         offstage: _selectedIndex != 0,
-        child: const RoutineScreen(),
+        child: RoutineScreen(
+          loggedUser: loggedUser,
+        ),
       ),
       Offstage(
         offstage: _selectedIndex != 1,
@@ -51,16 +68,12 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
       ),
       Offstage(
         offstage: _selectedIndex != 2,
-        child: Container(),
+        child: const CalendarScreen(),
       ),
       Offstage(
         offstage: _selectedIndex != 3,
         child: const ProfileScreen(),
       ),
-      // Offstage(
-      //   offstage: _selectedIndex != 4,
-      //   child: Container(),
-      // ),
     ]);
   }
 
@@ -90,19 +103,13 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           icon: FaIcon(
             FontAwesomeIcons.calendarCheck,
           ),
-          label: "달력",
+          label: "캘린더",
         ),
-        // BottomNavigationBarItem(
-        //   icon: FaIcon(
-        //     FontAwesomeIcons.comments,
-        //   ),
-        //   label: "커뮤니티",
-        // ),
         BottomNavigationBarItem(
           icon: FaIcon(
-            FontAwesomeIcons.user,
+            FontAwesomeIcons.gear,
           ),
-          label: "프로필",
+          label: "설정",
         ),
       ],
     );

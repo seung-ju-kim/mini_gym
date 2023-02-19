@@ -88,7 +88,7 @@ class _EmailScreenState extends State<EmailScreen> {
         children: [
           Gaps.v40,
           const Text(
-            "이메일은 무엇인가요?",
+            "사용할 이메일은 무엇인가요?",
             style: TextStyle(
               fontSize: Sizes.size24,
               fontWeight: FontWeight.w700,

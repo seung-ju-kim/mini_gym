@@ -27,6 +27,7 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
             email: formData['email']!,
             password: formData['password']!,
           );
+
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
                 builder: (context) => (const MainNavigationScreen()),
@@ -42,8 +43,6 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
         }
       }
     }
-
-    await FirebaseAuth.instance.setPersistence(Persistence.NONE);
   }
 
   @override

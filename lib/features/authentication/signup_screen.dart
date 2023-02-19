@@ -28,6 +28,9 @@ class SignupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Container(),
+      ),
       body: getBody(context),
       bottomNavigationBar: getBottomNavigationBar(context),
     );
@@ -38,11 +41,21 @@ class SignupScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: Sizes.size40),
       child: Column(children: [
         Gaps.v80,
-        const Text(
-          "미니짐에 오신 것을 환영합니다.",
-          style: TextStyle(
-            fontSize: Sizes.size24,
-            fontWeight: FontWeight.w700,
+        RichText(
+          text: TextSpan(
+            text: "미니짐",
+            style: TextStyle(
+              color: Theme.of(context).primaryColor,
+              fontSize: Sizes.size24,
+              fontWeight: FontWeight.w700,
+            ),
+            children: const <TextSpan>[
+              TextSpan(
+                  text: "에 온신 것을 환영합니다",
+                  style: TextStyle(
+                    color: Colors.black,
+                  )),
+            ],
           ),
         ),
         Gaps.v20,

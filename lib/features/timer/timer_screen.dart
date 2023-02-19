@@ -11,12 +11,12 @@ class TimerScreen extends StatefulWidget {
 }
 
 class _TimerScreenState extends State<TimerScreen> {
-  int _totalSeconds = 3595;
+  int _totalSeconds = 0;
   int _restSeconds = 0;
   bool _totalIsRunning = false;
   bool _restIsRunning = false;
-  late Timer totalTimer;
-  late Timer restTimer;
+  late Timer totalTimer = Timer(Duration.zero, () {});
+  late Timer restTimer = Timer(Duration.zero, () {});
 
   void _onTotalTick(Timer timer) {
     setState(() {
@@ -55,26 +55,30 @@ class _TimerScreenState extends State<TimerScreen> {
   // 휴식 타이머
   void _onRestTick(Timer timer) {
     if (_restSeconds == 0) {
+      restTimer.cancel();
       setState(() {
         _restIsRunning = false;
       });
+    } else {
+      setState(() {
+        _restSeconds -= 1;
+      });
     }
-    setState(() {
-      _restSeconds -= 1;
-    });
   }
 
   void _onRestStartPressed() {
-    restTimer = Timer.periodic(
-      const Duration(
-        seconds: 1,
-      ),
-      _onRestTick,
-    );
+    if (_restSeconds > 0) {
+      restTimer = Timer.periodic(
+        const Duration(
+          seconds: 1,
+        ),
+        _onRestTick,
+      );
 
-    setState(() {
-      _restIsRunning = true;
-    });
+      setState(() {
+        _restIsRunning = true;
+      });
+    }
   }
 
   void _onRestPausePressed() {
@@ -86,9 +90,10 @@ class _TimerScreenState extends State<TimerScreen> {
 
   void _onRestStopPressed() {
     restTimer.cancel();
+
     setState(() {
-      _restIsRunning = false;
       _restSeconds = 0;
+      _restIsRunning = false;
     });
   }
 

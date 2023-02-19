@@ -50,9 +50,6 @@ class _PasswordScreenState extends State<PasswordScreen> {
           email: widget.email, password: _password);
     } on FirebaseAuthException catch (e) {
       if (e.code == "weak-password") {
-        const SnackBar(
-          content: Text("gi"),
-        );
       } else if (e.code == "email-already-in-use") {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -73,7 +70,22 @@ class _PasswordScreenState extends State<PasswordScreen> {
         Navigator.pop(context);
       }
     } catch (e) {
-      print(e);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Theme.of(context).primaryColor,
+          content: Text(
+            e.toString(),
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: Sizes.size16,
+            ),
+          ),
+          duration: const Duration(
+            seconds: 3,
+          ),
+        ),
+      );
     }
 
     await FirebaseAuth.instance.setPersistence(Persistence.NONE);
@@ -135,7 +147,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
         children: [
           Gaps.v40,
           const Text(
-            "비밀번호",
+            "비밀번호를 입력하세요",
             style: TextStyle(
               fontSize: Sizes.size24,
               fontWeight: FontWeight.w700,

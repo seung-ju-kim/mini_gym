@@ -21,26 +21,28 @@ class AddExerciseScreen extends StatefulWidget {
   State<AddExerciseScreen> createState() => _AddExerciseScreenState();
 }
 
-class _AddExerciseScreenState extends State<AddExerciseScreen> {
-  bool _isSetOpened = false;
+class _AddExerciseScreenState extends State<AddExerciseScreen>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _animationController = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 300),
+  );
+  late final Animation<Offset> _panelAnimation = Tween(
+    begin: const Offset(0, 1),
+    end: Offset.zero,
+  ).animate(_animationController);
 
   void _onSavePress() {}
-  void _addExerciseTap() {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const AddExerciseScreen()));
+  void _onSetPressed() {
+    if (_animationController.isCompleted) {
+      _animationController.reverse();
+    } else {
+      _animationController.forward();
+    }
   }
 
   void _onScaffoldTap() {
     FocusScope.of(context).unfocus();
-    setState(() {
-      _isSetOpened = false;
-    });
-  }
-
-  void _onSetPressed() {
-    setState(() {
-      _isSetOpened = true;
-    });
   }
 
   @override
@@ -144,27 +146,21 @@ class _AddExerciseScreenState extends State<AddExerciseScreen> {
               ],
             ),
           ),
-          bottomNavigationBar: AnimatedContainer(
-            height: _isSetOpened ? 300 : 0,
-            duration: const Duration(
-              milliseconds: 300,
-            ),
-            curve: Curves.fastOutSlowIn,
-            child: BottomAppBar(
-              elevation: 0,
+          bottomNavigationBar: BottomAppBar(
+            elevation: 0,
+            child: SlideTransition(
+              position: _panelAnimation,
               child: SizedBox(
+                height: 350,
                 child: CupertinoPicker(
                   itemExtent: Sizes.size32,
-                  onSelectedItemChanged: (int value) => {},
+                  onSelectedItemChanged: (int value) => {print(value)},
                   children: const [
                     Text("1세트"),
                     Text("2세트"),
                     Text("3세트"),
                     Text("4세트"),
                     Text("5세트"),
-                    Text("6세트"),
-                    Text("7세트"),
-                    Text("8세트"),
                   ],
                 ),
               ),

@@ -23,6 +23,10 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Container(),
+        leading: Container(),
+      ),
       body: getBody(context),
       bottomNavigationBar: getBottomNavigationBar(context),
     );
@@ -33,9 +37,22 @@ class LoginScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: Sizes.size40),
       child: Column(children: [
         Gaps.v80,
-        const Text(
-          "미니짐 로그인",
-          style: TextStyle(fontSize: Sizes.size24, fontWeight: FontWeight.w700),
+        RichText(
+          text: TextSpan(
+            text: "미니짐",
+            style: TextStyle(
+              color: Theme.of(context).primaryColor,
+              fontSize: Sizes.size24,
+              fontWeight: FontWeight.w700,
+            ),
+            children: const <TextSpan>[
+              TextSpan(
+                  text: " 로그인",
+                  style: TextStyle(
+                    color: Colors.black,
+                  )),
+            ],
+          ),
         ),
         Gaps.v20,
         const Text(

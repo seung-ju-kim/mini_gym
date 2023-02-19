@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:minigym/constants/gaps.dart';
 import 'package:minigym/constants/sizes.dart';
@@ -5,17 +6,18 @@ import 'package:minigym/features/main/add_routine_screen.dart';
 import 'package:minigym/features/main/widgets/routine_card.dart';
 
 class RoutineScreen extends StatefulWidget {
-  const RoutineScreen({super.key});
+  const RoutineScreen({super.key, this.loggedUser});
+
+  final loggedUser;
 
   @override
   State<RoutineScreen> createState() => _RoutineScreenState();
 }
 
 class _RoutineScreenState extends State<RoutineScreen> {
+  final db = FirebaseFirestore.instance;
   final List<String> title = [
     '무분할 루틴',
-    "2분할 A",
-    "2분할 B",
   ];
 
   void _onAddTap() {
@@ -62,7 +64,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
     return ListView.separated(
       itemCount: title.length,
       padding: const EdgeInsets.symmetric(
-        vertical: Sizes.size60,
+        vertical: Sizes.size20,
       ),
       itemBuilder: (context, index) {
         return RoutineCard(
