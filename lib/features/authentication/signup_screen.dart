@@ -5,6 +5,7 @@ import 'package:minigym/constants/sizes.dart';
 import 'package:minigym/features/authentication/email_screen.dart';
 import 'package:minigym/features/authentication/login_screen.dart';
 import 'package:minigym/features/authentication/widgets/auth_button.dart';
+import 'package:minigym/utils.dart';
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({super.key});
@@ -28,92 +29,89 @@ class SignupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Container(),
-      ),
-      body: getBody(context),
-      bottomNavigationBar: getBottomNavigationBar(context),
-    );
-  }
-
-  Padding getBody(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: Sizes.size40),
-      child: Column(children: [
-        Gaps.v80,
-        RichText(
-          text: TextSpan(
-            text: "미니짐",
-            style: TextStyle(
-              color: Theme.of(context).primaryColor,
-              fontSize: Sizes.size24,
-              fontWeight: FontWeight.w700,
-            ),
-            children: const <TextSpan>[
-              TextSpan(
-                  text: "에 온신 것을 환영합니다",
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: Sizes.size40,
+          ),
+          child: Column(
+            children: [
+              Gaps.v80,
+              RichText(
+                text: TextSpan(
+                  text: "미니짐",
                   style: TextStyle(
-                    color: Colors.black,
-                  )),
+                    color: Theme.of(context).primaryColor,
+                    fontSize: Sizes.size24,
+                    fontWeight: FontWeight.w700,
+                  ),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: "에 온신 것을 환영합니다",
+                      style: TextStyle(
+                        color:
+                            isDarkMode(context) ? Colors.white : Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Gaps.v20,
+              const Opacity(
+                opacity: 0.7,
+                child: Text(
+                  "프로필을 생성하고 오늘부터 운동을 기록해보세요.",
+                  style: TextStyle(
+                    fontSize: Sizes.size16,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              Gaps.v40,
+              AuthButton(
+                icon: const FaIcon(FontAwesomeIcons.user),
+                text: "이메일, 비밀번호로 가입하기",
+                action: () => _onEmailTap(context),
+              ),
+              Gaps.v16,
+              AuthButton(
+                icon: const FaIcon(FontAwesomeIcons.apple),
+                text: "Apple로 시작하기",
+                action: () => _onEmailTap(context),
+              ),
             ],
           ),
         ),
-        Gaps.v20,
-        const Text(
-          "프로필을 생성하고 오늘부터 운동을 기록해보세요.",
-          style: TextStyle(
-            fontSize: Sizes.size16,
-            color: Colors.black45,
+      ),
+      bottomNavigationBar: BottomAppBar(
+        elevation: 2,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: Sizes.size20,
           ),
-          textAlign: TextAlign.center,
-        ),
-        Gaps.v40,
-        AuthButton(
-          icon: const FaIcon(FontAwesomeIcons.user),
-          text: "이메일, 비밀번호로 가입하기",
-          action: () => _onEmailTap(context),
-        ),
-        Gaps.v16,
-        // AuthButton(
-        //   icon: const FaIcon(FontAwesomeIcons.apple),
-        //   text: "Apple로 시작하기",
-        //   action: () => _onEmailTap(context),
-        // ),
-        Gaps.v16,
-      ]),
-    );
-  }
-
-  BottomAppBar getBottomNavigationBar(BuildContext context) {
-    return BottomAppBar(
-      color: Colors.grey.shade50,
-      elevation: 0,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: Sizes.size20,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              "이미 계정이 있으신가요?",
-              style: TextStyle(
-                fontSize: Sizes.size16,
-              ),
-            ),
-            Gaps.h5,
-            GestureDetector(
-              onTap: () => _onLoginTap(context),
-              child: Text(
-                "로그인",
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                "이미 계정이 있으신가요?",
                 style: TextStyle(
-                  color: Theme.of(context).primaryColor,
-                  fontWeight: FontWeight.w600,
                   fontSize: Sizes.size16,
                 ),
               ),
-            ),
-          ],
+              Gaps.h5,
+              GestureDetector(
+                onTap: () => _onLoginTap(context),
+                child: Text(
+                  "로그인",
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColor,
+                    fontWeight: FontWeight.w600,
+                    fontSize: Sizes.size16,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

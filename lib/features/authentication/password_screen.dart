@@ -22,6 +22,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
 
   String _password = "";
   bool _obscureText = true;
+  bool _isLoading = false;
 
   // 비밀번호 유효성 검사
   bool _isPasswordLength() {
@@ -44,12 +45,30 @@ class _PasswordScreenState extends State<PasswordScreen> {
 
   void _onSubmit() async {
     if (!_isPasswordValid()) return;
-
+    setState(() {
+      _isLoading = true;
+    });
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: widget.email, password: _password);
     } on FirebaseAuthException catch (e) {
       if (e.code == "weak-password") {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Theme.of(context).primaryColor,
+            content: const Text(
+              "비밀번호가 너무 취약합니다.",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: Sizes.size16,
+              ),
+            ),
+            duration: const Duration(
+              seconds: 3,
+            ),
+          ),
+        );
       } else if (e.code == "email-already-in-use") {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -68,6 +87,9 @@ class _PasswordScreenState extends State<PasswordScreen> {
           ),
         );
         Navigator.pop(context);
+        setState(() {
+          _isLoading = false;
+        });
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -86,6 +108,9 @@ class _PasswordScreenState extends State<PasswordScreen> {
           ),
         ),
       );
+      setState(() {
+        _isLoading = false;
+      });
     }
 
     await FirebaseAuth.instance.setPersistence(Persistence.NONE);
@@ -234,7 +259,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
           GestureDetector(
             onTap: _onSubmit,
             child: FormButton(
-              disabled: !_isPasswordValid(),
+              disabled: !_isPasswordValid() || _isLoading,
               text: "다음",
             ),
           ),

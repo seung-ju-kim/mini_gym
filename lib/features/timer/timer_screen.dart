@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:minigym/constants/breakpoints.dart';
 import 'package:minigym/constants/gaps.dart';
 import 'package:minigym/constants/sizes.dart';
+import 'package:minigym/utils.dart';
 
 class TimerScreen extends StatefulWidget {
   const TimerScreen({super.key});
@@ -117,73 +119,90 @@ class _TimerScreenState extends State<TimerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        vertical: Sizes.size10,
+        horizontal: Sizes.size20,
+      ),
       child: Scaffold(
-        body: Column(
+        appBar: AppBar(
+          title: const Text("운동 타이머"),
+          centerTitle: false,
+        ),
+        body: Stack(
           children: [
-            Flexible(
-              flex: 1,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    "총 운동 시간",
-                    style: TextStyle(
-                      fontSize: Sizes.size24,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  Text(
-                    format(_totalSeconds),
-                    style: const TextStyle(
-                      fontSize: 90,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: Sizes.size80,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        TextButton(
-                          onPressed: _totalIsRunning
-                              ? _onTotalPausePressed
-                              : _onTotalStartPressed,
-                          child: Text(
-                            _totalIsRunning ? "일시정지" : "운동시작",
-                            style: const TextStyle(
-                              fontSize: Sizes.size24,
-                              color: Colors.black87,
-                            ),
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: _onTotalStopPressed,
-                          child: const Text(
-                            "운동종료",
-                            style: TextStyle(
-                              fontSize: Sizes.size24,
-                              color: Colors.black87,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Flexible(
-              flex: 1,
-              child: Container(),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: Sizes.size10,
-              ),
+            Align(
+              alignment: Alignment.topCenter,
               child: Container(
+                constraints: const BoxConstraints(
+                  maxWidth: Breakpoints.sm,
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Gaps.v40,
+                    const Text(
+                      "총 운동 시간",
+                      style: TextStyle(
+                        fontSize: Sizes.size32,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Text(
+                      format(_totalSeconds),
+                      style: const TextStyle(
+                        fontSize: Sizes.size40,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: Sizes.size80,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          TextButton(
+                            onPressed: _totalIsRunning
+                                ? _onTotalPausePressed
+                                : _onTotalStartPressed,
+                            child: Text(
+                              _totalIsRunning ? "일시정지" : "운동시작",
+                              style: TextStyle(
+                                  fontSize: Sizes.size24,
+                                  color: isDarkMode(context)
+                                      ? Colors.white
+                                      : Colors.black87),
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: _onTotalStopPressed,
+                            child: Text(
+                              "운동종료",
+                              style: TextStyle(
+                                fontSize: Sizes.size24,
+                                color: isDarkMode(context)
+                                    ? Colors.white
+                                    : Colors.black87,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                constraints: const BoxConstraints(
+                  maxWidth: Breakpoints.sm,
+                ),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: Sizes.size10,
+                ),
                 margin: const EdgeInsets.only(
                   bottom: Sizes.size14,
                 ),
@@ -192,11 +211,11 @@ class _TimerScreenState extends State<TimerScreen> {
                     BoxShadow(
                       color: Colors.grey.withOpacity(0.3),
                       blurRadius: 5.0,
-                      offset: const Offset(2, 2),
+                      offset: const Offset(0, 0),
                     ),
                   ],
                   borderRadius: BorderRadius.circular(Sizes.size14),
-                  color: Colors.white,
+                  color: isDarkMode(context) ? Colors.black : Colors.white,
                 ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
@@ -204,10 +223,18 @@ class _TimerScreenState extends State<TimerScreen> {
                     horizontal: Sizes.size24,
                   ),
                   child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Row(
-                        children: const [
-                          Text("세트 간 휴식 타이머"),
+                        children: [
+                          Text(
+                            "세트 간 휴식 타이머",
+                            style: TextStyle(
+                              color: isDarkMode(context)
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
+                          ),
                         ],
                       ),
                       Gaps.v10,
@@ -216,8 +243,11 @@ class _TimerScreenState extends State<TimerScreen> {
                         children: [
                           Text(
                             format(_restSeconds),
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: Sizes.size28,
+                              color: isDarkMode(context)
+                                  ? Colors.white
+                                  : Colors.black87,
                             ),
                           ),
                         ],
@@ -228,37 +258,45 @@ class _TimerScreenState extends State<TimerScreen> {
                         children: [
                           OutlinedButton(
                             onPressed: () => _onSecondsPresssed(10),
-                            child: const Text(
+                            child: Text(
                               "+10초",
                               style: TextStyle(
-                                color: Colors.black87,
+                                color: isDarkMode(context)
+                                    ? Colors.white
+                                    : Colors.black87,
                               ),
                             ),
                           ),
                           OutlinedButton(
                             onPressed: () => _onSecondsPresssed(30),
-                            child: const Text(
+                            child: Text(
                               "+30초",
                               style: TextStyle(
-                                color: Colors.black87,
+                                color: isDarkMode(context)
+                                    ? Colors.white
+                                    : Colors.black87,
                               ),
                             ),
                           ),
                           OutlinedButton(
                             onPressed: () => _onSecondsPresssed(60),
-                            child: const Text(
+                            child: Text(
                               "+1분",
                               style: TextStyle(
-                                color: Colors.black87,
+                                color: isDarkMode(context)
+                                    ? Colors.white
+                                    : Colors.black87,
                               ),
                             ),
                           ),
                           OutlinedButton(
                             onPressed: () => _onSecondsPresssed(300),
-                            child: const Text(
+                            child: Text(
                               "+5분",
                               style: TextStyle(
-                                color: Colors.black87,
+                                color: isDarkMode(context)
+                                    ? Colors.white
+                                    : Colors.black87,
                               ),
                             ),
                           ),
@@ -274,17 +312,21 @@ class _TimerScreenState extends State<TimerScreen> {
                                 : _onRestStartPressed,
                             child: Text(
                               _restIsRunning ? "중지" : "시작",
-                              style: const TextStyle(
-                                color: Colors.black87,
+                              style: TextStyle(
+                                color: isDarkMode(context)
+                                    ? Colors.white
+                                    : Colors.black87,
                               ),
                             ),
                           ),
                           TextButton(
                             onPressed: _onRestStopPressed,
-                            child: const Text(
+                            child: Text(
                               "초기화",
                               style: TextStyle(
-                                color: Colors.black87,
+                                color: isDarkMode(context)
+                                    ? Colors.white
+                                    : Colors.black87,
                               ),
                             ),
                           )

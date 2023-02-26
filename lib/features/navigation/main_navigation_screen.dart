@@ -49,69 +49,59 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: getBody(),
-      bottomNavigationBar: getBottomNavigationBar(),
-    );
-  }
-
-  Stack getBody() {
-    return Stack(children: [
-      Offstage(
-        offstage: _selectedIndex != 0,
-        child: RoutineScreen(
-          loggedUser: loggedUser,
+      body: Stack(children: [
+        Offstage(
+          offstage: _selectedIndex != 0,
+          child: const RoutineScreen(),
         ),
-      ),
-      Offstage(
-        offstage: _selectedIndex != 1,
-        child: const TimerScreen(),
-      ),
-      Offstage(
-        offstage: _selectedIndex != 2,
-        child: const CalendarScreen(),
-      ),
-      Offstage(
-        offstage: _selectedIndex != 3,
-        child: const ProfileScreen(),
-      ),
-    ]);
-  }
-
-  BottomNavigationBar getBottomNavigationBar() {
-    return BottomNavigationBar(
-      elevation: 0,
-      type: BottomNavigationBarType.fixed,
-      onTap: _onTap,
-      currentIndex: _selectedIndex,
-      selectedItemColor: Theme.of(context).primaryColor,
-      unselectedItemColor: Colors.grey.shade400,
-      showUnselectedLabels: true,
-      items: const [
-        BottomNavigationBarItem(
-          icon: FaIcon(
-            FontAwesomeIcons.repeat,
+        Offstage(
+          offstage: _selectedIndex != 1,
+          child: const TimerScreen(),
+        ),
+        Offstage(
+          offstage: _selectedIndex != 2,
+          child: const CalendarScreen(),
+        ),
+        Offstage(
+          offstage: _selectedIndex != 3,
+          child: const ProfileScreen(),
+        ),
+      ]),
+      bottomNavigationBar: BottomNavigationBar(
+        elevation: 0,
+        type: BottomNavigationBarType.fixed,
+        onTap: _onTap,
+        currentIndex: _selectedIndex,
+        selectedItemColor: Theme.of(context).primaryColor,
+        unselectedItemColor: Colors.grey.shade400,
+        showUnselectedLabels: true,
+        items: const [
+          BottomNavigationBarItem(
+            icon: FaIcon(
+              FontAwesomeIcons.repeat,
+            ),
+            label: "루틴",
           ),
-          label: "루틴",
-        ),
-        BottomNavigationBarItem(
-          icon: FaIcon(
-            FontAwesomeIcons.clock,
+          BottomNavigationBarItem(
+            icon: FaIcon(
+              FontAwesomeIcons.clock,
+            ),
+            label: "타이머",
           ),
-          label: "타이머",
-        ),
-        BottomNavigationBarItem(
-          icon: FaIcon(
-            FontAwesomeIcons.calendarCheck,
+          BottomNavigationBarItem(
+            icon: FaIcon(
+              FontAwesomeIcons.calendarCheck,
+            ),
+            label: "캘린더",
           ),
-          label: "캘린더",
-        ),
-        BottomNavigationBarItem(
-          icon: FaIcon(
-            FontAwesomeIcons.gear,
+          BottomNavigationBarItem(
+            icon: FaIcon(
+              FontAwesomeIcons.gear,
+            ),
+            label: "설정",
           ),
-          label: "설정",
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
