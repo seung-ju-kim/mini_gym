@@ -38,13 +38,6 @@ class _AddBodyPartButtonState extends State<AddBodyPartButton> {
           color: _isSelected ? Theme.of(context).primaryColor : Colors.white,
           border: Border.all(color: Colors.black.withOpacity(0.1)),
           borderRadius: BorderRadius.circular(Sizes.size10),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.05),
-              blurRadius: 5,
-              spreadRadius: 5,
-            ),
-          ],
         ),
         child: Text(
           widget.part,

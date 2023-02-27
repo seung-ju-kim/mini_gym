@@ -4,7 +4,7 @@ import 'package:minigym/constants/gaps.dart';
 import 'package:minigym/constants/sizes.dart';
 import 'package:minigym/features/authentication/login_form_screen.dart';
 import 'package:minigym/features/authentication/widgets/auth_button.dart';
-import 'package:minigym/utils.dart';
+import 'package:minigym/generated/l10n.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -32,46 +32,28 @@ class LoginScreen extends StatelessWidget {
           child: Column(
             children: [
               Gaps.v80,
-              RichText(
-                text: TextSpan(
-                  text: "미니짐",
-                  style: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                    fontSize: Sizes.size24,
-                    fontWeight: FontWeight.w700,
-                  ),
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: " 로그인",
-                      style: TextStyle(
-                        color:
-                            isDarkMode(context) ? Colors.white : Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
+              Text(
+                S.of(context).loginTitle,
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
               Gaps.v20,
-              const Opacity(
+              Opacity(
                 opacity: 0.7,
                 child: Text(
-                  "오늘의 운동을 기록 하세요",
-                  style: TextStyle(
-                    fontSize: Sizes.size16,
-                  ),
-                  textAlign: TextAlign.center,
+                  S.of(context).loginSubtitle,
+                  style: Theme.of(context).textTheme.titleSmall,
                 ),
               ),
               Gaps.v40,
               AuthButton(
                 icon: const FaIcon(FontAwesomeIcons.user),
-                text: "이메일, 비밀번호로 로그인",
+                text: S.of(context).loginWithEmailAndPassword,
                 action: () => _onLoginTap(context),
               ),
               Gaps.v16,
               AuthButton(
                 icon: const FaIcon(FontAwesomeIcons.apple),
-                text: "Apple로 로그인",
+                text: S.of(context).loginWithApple,
                 action: () => _onSignupTap(context),
               ),
               Gaps.v16,
@@ -88,22 +70,19 @@ class LoginScreen extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                "아직 계정이 없으신가요?",
-                style: TextStyle(
-                  fontSize: Sizes.size16,
-                ),
+              Text(
+                S.of(context).dontHaveAnAccount,
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
               Gaps.h5,
               GestureDetector(
                 onTap: () => _onSignupTap(context),
                 child: Text(
-                  "회원가입",
-                  style: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                    fontWeight: FontWeight.w600,
-                    fontSize: Sizes.size16,
-                  ),
+                  S.of(context).signup,
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        color: Theme.of(context).primaryColor,
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
               ),
             ],

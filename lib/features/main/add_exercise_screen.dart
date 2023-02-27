@@ -59,7 +59,6 @@ class _AddExerciseScreenState extends State<AddExerciseScreen>
                   "저장",
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: Sizes.size16,
                   ),
                 ),
               ),
@@ -73,12 +72,9 @@ class _AddExerciseScreenState extends State<AddExerciseScreen>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Gaps.v40,
-                const Text(
+                Text(
                   "운동 이름",
-                  style: TextStyle(
-                    fontSize: Sizes.size20,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
                 Gaps.v16,
                 TextField(
@@ -98,12 +94,9 @@ class _AddExerciseScreenState extends State<AddExerciseScreen>
                   cursorColor: Theme.of(context).primaryColor,
                 ),
                 Gaps.v40,
-                const Text(
+                Text(
                   "운동 볼륨",
-                  style: TextStyle(
-                    fontSize: Sizes.size20,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
                 Gaps.v16,
                 Row(
@@ -118,7 +111,6 @@ class _AddExerciseScreenState extends State<AddExerciseScreen>
                         child: Text(
                           "세트",
                           style: TextStyle(
-                            fontSize: Sizes.size20,
                             color: Colors.black,
                           ),
                         ),
@@ -135,7 +127,6 @@ class _AddExerciseScreenState extends State<AddExerciseScreen>
                         child: Text(
                           "kg",
                           style: TextStyle(
-                            fontSize: Sizes.size20,
                             color: Colors.black,
                           ),
                         ),

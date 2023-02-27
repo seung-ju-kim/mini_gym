@@ -4,6 +4,7 @@ import 'package:minigym/constants/gaps.dart';
 import 'package:minigym/constants/sizes.dart';
 import 'package:minigym/features/authentication/widgets/form_button.dart';
 import 'package:minigym/features/navigation/main_navigation_screen.dart';
+import 'package:minigym/generated/l10n.dart';
 
 class LoginFormScreen extends StatefulWidget {
   const LoginFormScreen({super.key});
@@ -49,7 +50,7 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("로그인"),
+        title: Text(S.of(context).login),
       ),
       body: Padding(
           padding: const EdgeInsets.symmetric(
@@ -62,7 +63,7 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                 Gaps.v28,
                 TextFormField(
                   decoration: InputDecoration(
-                    hintText: "이메일",
+                    hintText: S.of(context).email,
                     enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(
                         color: Colors.grey.shade400,
@@ -76,7 +77,7 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                   ),
                   validator: (value) {
                     if (value != null && value.isEmpty) {
-                      return "등록된 이메일이 아닙니다";
+                      return S.of(context).notRegisteredEmail;
                     }
                     return null;
                   },
@@ -91,7 +92,7 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                   obscureText: true,
                   onEditingComplete: _onSubmitTap,
                   decoration: InputDecoration(
-                    hintText: "비밀번호",
+                    hintText: S.of(context).password,
                     enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(
                         color: Colors.grey.shade400,
@@ -105,7 +106,7 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                   ),
                   validator: (value) {
                     if (value != null && value.isEmpty) {
-                      return "잘못된 비밀번호 입니다";
+                      return S.of(context).wrongPassword;
                     }
                     return null;
                   },
@@ -118,7 +119,8 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                 Gaps.v28,
                 GestureDetector(
                     onTap: _onSubmitTap,
-                    child: const FormButton(disabled: false, text: "로그인")),
+                    child:
+                        FormButton(disabled: false, text: S.of(context).login)),
               ],
             ),
           )),

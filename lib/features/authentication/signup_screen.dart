@@ -5,7 +5,7 @@ import 'package:minigym/constants/sizes.dart';
 import 'package:minigym/features/authentication/email_screen.dart';
 import 'package:minigym/features/authentication/login_screen.dart';
 import 'package:minigym/features/authentication/widgets/auth_button.dart';
-import 'package:minigym/utils.dart';
+import 'package:minigym/generated/l10n.dart';
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({super.key});
@@ -37,46 +37,28 @@ class SignupScreen extends StatelessWidget {
           child: Column(
             children: [
               Gaps.v80,
-              RichText(
-                text: TextSpan(
-                  text: "미니짐",
-                  style: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                    fontSize: Sizes.size24,
-                    fontWeight: FontWeight.w700,
-                  ),
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: "에 온신 것을 환영합니다",
-                      style: TextStyle(
-                        color:
-                            isDarkMode(context) ? Colors.white : Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
+              Text(
+                S.of(context).signUpTitle,
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
               Gaps.v20,
-              const Opacity(
+              Opacity(
                 opacity: 0.7,
                 child: Text(
-                  "프로필을 생성하고 오늘부터 운동을 기록해보세요.",
-                  style: TextStyle(
-                    fontSize: Sizes.size16,
-                  ),
-                  textAlign: TextAlign.center,
+                  S.of(context).signUpSubtitle,
+                  style: Theme.of(context).textTheme.titleSmall,
                 ),
               ),
               Gaps.v40,
               AuthButton(
                 icon: const FaIcon(FontAwesomeIcons.user),
-                text: "이메일, 비밀번호로 가입하기",
+                text: S.of(context).signUpWithEmailAndPassword,
                 action: () => _onEmailTap(context),
               ),
               Gaps.v16,
               AuthButton(
                 icon: const FaIcon(FontAwesomeIcons.apple),
-                text: "Apple로 시작하기",
+                text: S.of(context).signUpWithApple,
                 action: () => _onEmailTap(context),
               ),
             ],
@@ -92,22 +74,19 @@ class SignupScreen extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                "이미 계정이 있으신가요?",
-                style: TextStyle(
-                  fontSize: Sizes.size16,
-                ),
+              Text(
+                S.of(context).alreadyHaveAnAccount,
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
               Gaps.h5,
               GestureDetector(
                 onTap: () => _onLoginTap(context),
                 child: Text(
-                  "로그인",
-                  style: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                    fontWeight: FontWeight.w600,
-                    fontSize: Sizes.size16,
-                  ),
+                  S.of(context).login,
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        color: Theme.of(context).primaryColor,
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
               ),
             ],

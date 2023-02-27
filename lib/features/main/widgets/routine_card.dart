@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:minigym/constants/breakpoints.dart';
 import 'package:minigym/constants/sizes.dart';
+import 'package:minigym/utils.dart';
 
 class RoutineCard extends StatefulWidget {
   final String title;
@@ -48,15 +49,11 @@ class _RoutineCardState extends State<RoutineCard>
             Sizes.size16,
           ),
           decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.3),
-                blurRadius: 5.0,
-                offset: const Offset(2, 2),
-              ),
-            ],
+            border: Border.all(
+              color: isDarkMode(context) ? Colors.white : Colors.grey.shade200,
+            ),
             borderRadius: BorderRadius.circular(Sizes.size14),
-            color: Colors.white,
+            color: isDarkMode(context) ? Colors.black : Colors.white,
           ),
           child: Column(
             children: [
@@ -64,24 +61,18 @@ class _RoutineCardState extends State<RoutineCard>
                 children: [
                   Text(
                     widget.title,
-                    style: const TextStyle(
-                      fontSize: Sizes.size16,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
-                    ),
+                    style: Theme.of(context).textTheme.titleMedium,
                   ),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  TextButton(
+                  IconButton(
                     onPressed: () {},
-                    child: Text(
-                      "삭제하기",
-                      style: TextStyle(
-                        color: Colors.red.shade700,
-                      ),
+                    icon: const FaIcon(
+                      FontAwesomeIcons.trash,
+                      size: Sizes.size20,
                     ),
                   ),
                   IconButton(
@@ -89,7 +80,6 @@ class _RoutineCardState extends State<RoutineCard>
                     icon: const FaIcon(
                       FontAwesomeIcons.pen,
                       size: Sizes.size20,
-                      color: Colors.black87,
                     ),
                   ),
                   IconButton(
@@ -97,7 +87,6 @@ class _RoutineCardState extends State<RoutineCard>
                     icon: const FaIcon(
                       FontAwesomeIcons.personWalking,
                       size: Sizes.size20,
-                      color: Colors.black87,
                     ),
                   ),
                 ],
@@ -139,9 +128,7 @@ class DetailWidget extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: const TextStyle(
-          fontSize: Sizes.size16,
-        ),
+        style: Theme.of(context).textTheme.bodyMedium,
       ),
     );
   }

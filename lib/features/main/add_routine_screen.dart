@@ -44,11 +44,10 @@ class _AddRoutineScreenState extends State<AddRoutineScreen> {
           actions: [
             TextButton(
               onPressed: _onSavePress,
-              child: const Text(
+              child: Text(
                 "저장",
                 style: TextStyle(
-                  color: Colors.black,
-                  fontSize: Sizes.size16,
+                  color: Theme.of(context).primaryColor,
                 ),
               ),
             ),
@@ -62,18 +61,15 @@ class _AddRoutineScreenState extends State<AddRoutineScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Gaps.v40,
-              const Text(
+              Text(
                 "루틴 이름",
-                style: TextStyle(
-                  fontSize: Sizes.size20,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: Theme.of(context).textTheme.titleLarge,
               ),
               Gaps.v16,
               TextField(
                 autocorrect: false,
                 decoration: InputDecoration(
-                  hintText: "무분할 루틴",
+                  hintText: "ex) 무분할 루틴",
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(
                       color: Colors.grey.shade400,
@@ -87,12 +83,9 @@ class _AddRoutineScreenState extends State<AddRoutineScreen> {
                 cursorColor: Theme.of(context).primaryColor,
               ),
               Gaps.v40,
-              const Text(
+              Text(
                 "운동 부위",
-                style: TextStyle(
-                  fontSize: Sizes.size20,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: Theme.of(context).textTheme.titleLarge,
               ),
               Gaps.v16,
               Wrap(

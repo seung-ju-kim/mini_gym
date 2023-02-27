@@ -141,19 +141,17 @@ class _TimerScreenState extends State<TimerScreen> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Gaps.v40,
-                    const Text(
+                    Text(
                       "총 운동 시간",
-                      style: TextStyle(
-                        fontSize: Sizes.size32,
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                            fontSize: Sizes.size40,
+                          ),
                     ),
                     Text(
                       format(_totalSeconds),
-                      style: const TextStyle(
-                        fontSize: Sizes.size40,
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                            fontSize: Sizes.size60,
+                          ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
@@ -168,23 +166,14 @@ class _TimerScreenState extends State<TimerScreen> {
                                 : _onTotalStartPressed,
                             child: Text(
                               _totalIsRunning ? "일시정지" : "운동시작",
-                              style: TextStyle(
-                                  fontSize: Sizes.size24,
-                                  color: isDarkMode(context)
-                                      ? Colors.white
-                                      : Colors.black87),
+                              style: Theme.of(context).textTheme.titleLarge,
                             ),
                           ),
                           TextButton(
                             onPressed: _onTotalStopPressed,
                             child: Text(
                               "운동종료",
-                              style: TextStyle(
-                                fontSize: Sizes.size24,
-                                color: isDarkMode(context)
-                                    ? Colors.white
-                                    : Colors.black87,
-                              ),
+                              style: Theme.of(context).textTheme.titleLarge,
                             ),
                           ),
                         ],

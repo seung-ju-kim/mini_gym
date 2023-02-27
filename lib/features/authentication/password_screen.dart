@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:minigym/constants/gaps.dart';
 import 'package:minigym/constants/sizes.dart';
 import 'package:minigym/features/authentication/widgets/form_button.dart';
+import 'package:minigym/generated/l10n.dart';
 
 class PasswordScreen extends StatefulWidget {
   const PasswordScreen({
@@ -56,10 +57,10 @@ class _PasswordScreenState extends State<PasswordScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             backgroundColor: Theme.of(context).primaryColor,
-            content: const Text(
-              "비밀번호가 너무 취약합니다.",
+            content: Text(
+              S.of(context).passwordIsWeak,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: Sizes.size16,
               ),
@@ -73,10 +74,10 @@ class _PasswordScreenState extends State<PasswordScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             backgroundColor: Theme.of(context).primaryColor,
-            content: const Text(
-              "이미 사용중인 이메일입니다.",
+            content: Text(
+              S.of(context).emailAlreadyInUse,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: Sizes.size16,
               ),
@@ -156,8 +157,8 @@ class _PasswordScreenState extends State<PasswordScreen> {
 
   AppBar getAppBar() {
     return AppBar(
-      title: const Text(
-        "회원가입",
+      title: Text(
+        S.of(context).signup,
       ),
     );
   }
@@ -171,12 +172,9 @@ class _PasswordScreenState extends State<PasswordScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Gaps.v40,
-          const Text(
-            "비밀번호를 입력하세요",
-            style: TextStyle(
-              fontSize: Sizes.size24,
-              fontWeight: FontWeight.w700,
-            ),
+          Text(
+            S.of(context).enterPassword,
+            style: Theme.of(context).textTheme.titleLarge,
           ),
           Gaps.v16,
           TextField(
@@ -209,7 +207,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
                   )
                 ],
               ),
-              hintText: "비밀번호",
+              hintText: S.of(context).password,
               enabledBorder: UnderlineInputBorder(
                 borderSide: BorderSide(
                   color: Colors.grey.shade400,
@@ -224,9 +222,9 @@ class _PasswordScreenState extends State<PasswordScreen> {
             cursorColor: Theme.of(context).primaryColor,
           ),
           Gaps.v10,
-          const Text(
-            "비밀번호 필수 조건:",
-            style: TextStyle(
+          Text(
+            S.of(context).passwordRequirement,
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -240,7 +238,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
                     _isPasswordLength() ? Colors.green : Colors.grey.shade400,
               ),
               Gaps.h5,
-              const Text("8자 이상 20자 이하"),
+              Text(S.of(context).passwordCondition1),
             ],
           ),
           Gaps.v10,
@@ -252,7 +250,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
                 color: _isPasswordReg() ? Colors.green : Colors.grey.shade400,
               ),
               Gaps.h5,
-              const Text("숫자, 문자, 특수문자의 조합"),
+              Text(S.of(context).passwordCondition2),
             ],
           ),
           Gaps.v28,
@@ -260,7 +258,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
             onTap: _onSubmit,
             child: FormButton(
               disabled: !_isPasswordValid() || _isLoading,
-              text: "다음",
+              text: S.of(context).next,
             ),
           ),
         ],
