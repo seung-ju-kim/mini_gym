@@ -1,29 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:minigym/constants/gaps.dart';
 import 'package:minigym/constants/sizes.dart';
-import 'package:minigym/features/authentication/email_screen.dart';
-import 'package:minigym/features/authentication/login_screen.dart';
 import 'package:minigym/features/authentication/widgets/auth_button.dart';
 import 'package:minigym/generated/l10n.dart';
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({super.key});
 
-  void _onLoginTap(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const LoginScreen(),
-      ),
-    );
+  void _onLoginTap(BuildContext context) async {
+    context.pushNamed("login_screen");
   }
 
-  void _onEmailTap(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const EmailScreen(),
-      ),
-    );
+  void _onEmailPasswordTap(BuildContext context) {
+    context.pushNamed("username_screen");
   }
 
   @override
@@ -53,14 +44,14 @@ class SignupScreen extends StatelessWidget {
               AuthButton(
                 icon: const FaIcon(FontAwesomeIcons.user),
                 text: S.of(context).signUpWithEmailAndPassword,
-                action: () => _onEmailTap(context),
+                action: () => _onEmailPasswordTap(context),
               ),
-              Gaps.v16,
-              AuthButton(
-                icon: const FaIcon(FontAwesomeIcons.apple),
-                text: S.of(context).signUpWithApple,
-                action: () => _onEmailTap(context),
-              ),
+              // Gaps.v16,
+              // AuthButton(
+              //   icon: const FaIcon(FontAwesomeIcons.apple),
+              //   text: S.of(context).signUpWithApple,
+              //   action: () => _onEmailPasswordTap(context),
+              // ),
             ],
           ),
         ),

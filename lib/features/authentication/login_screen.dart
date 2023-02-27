@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:minigym/constants/gaps.dart';
 import 'package:minigym/constants/sizes.dart';
-import 'package:minigym/features/authentication/login_form_screen.dart';
 import 'package:minigym/features/authentication/widgets/auth_button.dart';
 import 'package:minigym/generated/l10n.dart';
 
@@ -10,15 +10,11 @@ class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   void _onSignupTap(BuildContext context) {
-    Navigator.of(context).pop();
+    context.pop();
   }
 
   void _onLoginTap(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const LoginFormScreen(),
-      ),
-    );
+    context.pushNamed("login_form_screen");
   }
 
   @override
@@ -50,13 +46,12 @@ class LoginScreen extends StatelessWidget {
                 text: S.of(context).loginWithEmailAndPassword,
                 action: () => _onLoginTap(context),
               ),
-              Gaps.v16,
-              AuthButton(
-                icon: const FaIcon(FontAwesomeIcons.apple),
-                text: S.of(context).loginWithApple,
-                action: () => _onSignupTap(context),
-              ),
-              Gaps.v16,
+              // Gaps.v16,
+              // AuthButton(
+              //   icon: const FaIcon(FontAwesomeIcons.apple),
+              //   text: S.of(context).loginWithApple,
+              //   action: () => _onSignupTap(context),
+              // ),
             ],
           ),
         ),

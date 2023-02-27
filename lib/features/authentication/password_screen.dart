@@ -149,119 +149,113 @@ class _PasswordScreenState extends State<PasswordScreen> {
     return GestureDetector(
       onTap: _onScaffoldTap,
       child: Scaffold(
-        appBar: getAppBar(),
-        body: getBody(),
-      ),
-    );
-  }
-
-  AppBar getAppBar() {
-    return AppBar(
-      title: Text(
-        S.of(context).signup,
-      ),
-    );
-  }
-
-  Padding getBody() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: Sizes.size36,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Gaps.v40,
-          Text(
-            S.of(context).enterPassword,
-            style: Theme.of(context).textTheme.titleLarge,
+        appBar: AppBar(
+          title: Text(
+            S.of(context).signup,
           ),
-          Gaps.v16,
-          TextField(
-            obscureText: _obscureText,
-            autocorrect: false,
-            controller: _passwordController,
-            onEditingComplete: _onSubmit,
-            decoration: InputDecoration(
-              suffix: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  GestureDetector(
-                    onTap: _onClearTap,
-                    child: FaIcon(
-                      FontAwesomeIcons.solidCircleXmark,
-                      color: Colors.grey.shade500,
-                      size: Sizes.size20,
+        ),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: Sizes.size36,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Gaps.v40,
+              Text(
+                S.of(context).enterPassword,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              Gaps.v16,
+              TextField(
+                obscureText: _obscureText,
+                autocorrect: false,
+                controller: _passwordController,
+                onEditingComplete: _onSubmit,
+                decoration: InputDecoration(
+                  suffix: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      GestureDetector(
+                        onTap: _onClearTap,
+                        child: FaIcon(
+                          FontAwesomeIcons.solidCircleXmark,
+                          color: Colors.grey.shade500,
+                          size: Sizes.size20,
+                        ),
+                      ),
+                      Gaps.h14,
+                      GestureDetector(
+                        onTap: _toggleObscureText,
+                        child: FaIcon(
+                          _obscureText
+                              ? FontAwesomeIcons.eye
+                              : FontAwesomeIcons.eyeSlash,
+                          color: Colors.grey.shade500,
+                          size: Sizes.size20,
+                        ),
+                      )
+                    ],
+                  ),
+                  hintText: S.of(context).password,
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.grey.shade400,
                     ),
                   ),
-                  Gaps.h14,
-                  GestureDetector(
-                    onTap: _toggleObscureText,
-                    child: FaIcon(
-                      _obscureText
-                          ? FontAwesomeIcons.eye
-                          : FontAwesomeIcons.eyeSlash,
-                      color: Colors.grey.shade500,
-                      size: Sizes.size20,
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.grey.shade400,
                     ),
-                  )
+                  ),
+                ),
+                cursorColor: Theme.of(context).primaryColor,
+              ),
+              Gaps.v10,
+              Text(
+                S.of(context).passwordRequirement,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Gaps.v10,
+              Row(
+                children: [
+                  FaIcon(
+                    FontAwesomeIcons.circleCheck,
+                    size: Sizes.size20,
+                    color: _isPasswordLength()
+                        ? Colors.green
+                        : Colors.grey.shade400,
+                  ),
+                  Gaps.h5,
+                  Text(S.of(context).passwordCondition1),
                 ],
               ),
-              hintText: S.of(context).password,
-              enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.grey.shade400,
+              Gaps.v10,
+              Row(
+                children: [
+                  FaIcon(
+                    FontAwesomeIcons.circleCheck,
+                    size: Sizes.size20,
+                    color:
+                        _isPasswordReg() ? Colors.green : Colors.grey.shade400,
+                  ),
+                  Gaps.h5,
+                  Text(S.of(context).passwordCondition2),
+                ],
+              ),
+              Gaps.v28,
+              GestureDetector(
+                onTap: _onSubmit,
+                child: FormButton(
+                  disabled: !_isPasswordValid() || _isLoading,
+                  text: S.of(context).next,
                 ),
               ),
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.grey.shade400,
-                ),
-              ),
-            ),
-            cursorColor: Theme.of(context).primaryColor,
-          ),
-          Gaps.v10,
-          Text(
-            S.of(context).passwordRequirement,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          Gaps.v10,
-          Row(
-            children: [
-              FaIcon(
-                FontAwesomeIcons.circleCheck,
-                size: Sizes.size20,
-                color:
-                    _isPasswordLength() ? Colors.green : Colors.grey.shade400,
-              ),
-              Gaps.h5,
-              Text(S.of(context).passwordCondition1),
             ],
           ),
-          Gaps.v10,
-          Row(
-            children: [
-              FaIcon(
-                FontAwesomeIcons.circleCheck,
-                size: Sizes.size20,
-                color: _isPasswordReg() ? Colors.green : Colors.grey.shade400,
-              ),
-              Gaps.h5,
-              Text(S.of(context).passwordCondition2),
-            ],
-          ),
-          Gaps.v28,
-          GestureDetector(
-            onTap: _onSubmit,
-            child: FormButton(
-              disabled: !_isPasswordValid() || _isLoading,
-              text: S.of(context).next,
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

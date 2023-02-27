@@ -5,9 +5,18 @@ import 'package:minigym/features/authentication/password_screen.dart';
 import 'package:minigym/features/authentication/widgets/form_button.dart';
 import 'package:minigym/generated/l10n.dart';
 
+class EmailScreenArgs {
+  final String username;
+
+  EmailScreenArgs({required this.username});
+}
+
 class EmailScreen extends StatefulWidget {
+  final String username;
+
   const EmailScreen({
     super.key,
+    required this.username,
   });
 
   @override
@@ -79,7 +88,7 @@ class _EmailScreenState extends State<EmailScreen> {
             children: [
               Gaps.v40,
               Text(
-                S.of(context).whatIsYourEmail,
+                "${widget.username} ${S.of(context).whatIsYourEmail}",
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               Gaps.v16,

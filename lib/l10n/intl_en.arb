@@ -11,7 +11,7 @@
     "loginWithApple": "Login with Apple",
     "dontHaveAnAccount": "Don't you have an account yet?",
     "signup": "Sign Up",
-    "whatIsYourEmail": "What is Email to use?",
+    "whatIsYourEmail": ", What is Email to use?",
     "email": "email",
     "next": "Next",
     "password": "password",
@@ -23,5 +23,7 @@
     "emailAlreadyInUse": "Email is already in use",
     "emailIsNotValid": "Email is Not valid",
     "notRegisteredEmail": "Email is not registered",
-    "wrongPassword": "Wrong password"
+    "wrongPassword": "Wrong password",
+    "createUsername": "사용할 이름을 입력하세요",
+    "username": "Username"
 }

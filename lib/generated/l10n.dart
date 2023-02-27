@@ -170,10 +170,10 @@ class S {
     );
   }
 
-  /// `What is Email to use?`
+  /// `, What is Email to use?`
   String get whatIsYourEmail {
     return Intl.message(
-      'What is Email to use?',
+      ', What is Email to use?',
       name: 'whatIsYourEmail',
       desc: '',
       args: [],
@@ -295,6 +295,26 @@ class S {
     return Intl.message(
       'Wrong password',
       name: 'wrongPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `사용할 이름을 입력하세요`
+  String get createUsername {
+    return Intl.message(
+      '사용할 이름을 입력하세요',
+      name: 'createUsername',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Username`
+  String get username {
+    return Intl.message(
+      'Username',
+      name: 'username',
       desc: '',
       args: [],
     );

@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:minigym/constants/gaps.dart';
 import 'package:minigym/constants/sizes.dart';
 import 'package:minigym/features/authentication/widgets/form_button.dart';
-import 'package:minigym/features/navigation/main_navigation_screen.dart';
 import 'package:minigym/generated/l10n.dart';
 
 class LoginFormScreen extends StatefulWidget {
@@ -29,15 +29,12 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
             password: formData['password']!,
           );
 
-          Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(
-                builder: (context) => (const MainNavigationScreen()),
-              ), (route) {
-            return false;
-          });
+          context.pushNamed("main_screen");
         } on FirebaseAuthException catch (e) {
           if (e.code == 'user-not-found') {
-            print('No user found for that email.');
+            if (mounted) {
+              print('No user found for that email.');
+            }
           } else if (e.code == 'wrong-password') {
             print('Wrong password provided for that user.');
           }

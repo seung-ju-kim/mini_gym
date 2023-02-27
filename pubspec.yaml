@@ -5,35 +5,38 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.19.0 <3.0.0'
+    sdk: '>=2.19.0 <3.0.0'
 
 dependencies:
-  flutter:
-    sdk: flutter
-  flutter_localizations:
-    sdk: flutter
+    flutter:
+        sdk: flutter
+    flutter_localizations:
+        sdk: flutter
 
-  # ui(icon, font...)
-  cupertino_icons: ^1.0.2
-  font_awesome_flutter: ^10.3.0
-  google_fonts: ^4.0.1
-  table_calendar: ^3.0.8
+    # ui(icon, font...)
+    cupertino_icons: ^1.0.2
+    font_awesome_flutter: ^10.3.0
+    google_fonts: ^4.0.1
+    table_calendar: ^3.0.8
 
-  # firebase
-  firebase_core: ^2.5.0
-  firebase_auth: ^4.2.2
-  cloud_firestore: ^4.3.2
+    # firebase
+    firebase_core: ^2.5.0
+    firebase_auth: ^4.2.2
+    cloud_firestore: ^4.3.2
 
-  # localization
-  intl: ^0.17.0
+    # localization
+    intl: ^0.17.0
+
+    # router
+    go_router: 6.0.2
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  flutter_lints: ^2.0.0
+    flutter_test:
+        sdk: flutter
+    flutter_lints: ^2.0.0
 
 flutter:
-  generate: true
-  uses-material-design: true
+    generate: true
+    uses-material-design: true
 flutter_intl:
-  enabled: true
+    enabled: true

@@ -24,6 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "alreadyHaveAnAccount": MessageLookupByLibrary.simpleMessage(
             "Do you already have an account?"),
+        "createUsername": MessageLookupByLibrary.simpleMessage("사용할 이름을 입력하세요"),
         "dontHaveAnAccount": MessageLookupByLibrary.simpleMessage(
             "Don\'t you have an account yet?"),
         "email": MessageLookupByLibrary.simpleMessage("email"),
@@ -63,8 +64,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "signUpWithEmailAndPassword": MessageLookupByLibrary.simpleMessage(
             "Sign Up with Email & Password"),
         "signup": MessageLookupByLibrary.simpleMessage("Sign Up"),
+        "username": MessageLookupByLibrary.simpleMessage("Username"),
         "whatIsYourEmail":
-            MessageLookupByLibrary.simpleMessage("What is Email to use?"),
+            MessageLookupByLibrary.simpleMessage(", What is Email to use?"),
         "wrongPassword": MessageLookupByLibrary.simpleMessage("Wrong password")
       };
 }

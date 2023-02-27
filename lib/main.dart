@@ -1,14 +1,12 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:minigym/constants/sizes.dart';
-import 'package:minigym/features/authentication/signup_screen.dart';
-import 'package:minigym/features/navigation/main_navigation_screen.dart';
 import 'package:minigym/firebase_options.dart';
 import 'package:minigym/generated/l10n.dart';
+import 'package:minigym/router.dart';
 
 void main() async {
   // Flutter engine과 framework를 묶는 접착제를 앱을 실행하기 전에 초기화
@@ -36,8 +34,8 @@ class MiniGymApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    S.load(const Locale("en"));
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: router,
       debugShowCheckedModeBanner: false,
       title: 'Mini Gym',
       localizationsDelegates: const [
@@ -147,16 +145,6 @@ class MiniGymApp extends StatelessWidget {
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           backgroundColor: Colors.black,
         ),
-      ),
-      home: StreamBuilder(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return const MainNavigationScreen();
-          } else {
-            return const SignupScreen();
-          }
-        },
       ),
     );
   }
