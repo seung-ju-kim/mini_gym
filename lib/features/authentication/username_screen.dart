@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:minigym/constants/gaps.dart';
 import 'package:minigym/constants/sizes.dart';
 import 'package:minigym/features/authentication/email_screen.dart';
@@ -36,9 +35,11 @@ class _UsernameScreenState extends State<UsernameScreen> {
 
   void _onNextTap() {
     if (_username.isEmpty) return;
-    context.pushNamed(
-      "email_screen",
-      extra: EmailScreenArgs(username: _username),
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => EmailScreen(username: _username),
+      ),
     );
   }
 

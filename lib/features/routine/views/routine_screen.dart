@@ -1,11 +1,13 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:minigym/common/widgets/routine_card.dart';
+
 import 'package:minigym/constants/gaps.dart';
 import 'package:minigym/constants/sizes.dart';
-import 'package:minigym/features/main/add_routine_screen.dart';
-import 'package:minigym/features/main/widgets/routine_card.dart';
+import 'package:minigym/features/routine/views/add_routine_screen.dart';
 
 class RoutineScreen extends StatefulWidget {
+  static const routeName = "routine_screen";
+  static const routeURL = "/routine";
   const RoutineScreen({super.key});
 
   @override
@@ -13,11 +15,7 @@ class RoutineScreen extends StatefulWidget {
 }
 
 class _RoutineScreenState extends State<RoutineScreen> {
-  final db = FirebaseFirestore.instance;
-
   final List<String> title = [
-    '무분할 루틴',
-    '무분할 루틴',
     '무분할 루틴',
   ];
 
@@ -62,6 +60,7 @@ class _RoutineScreenState extends State<RoutineScreen> {
           child: ListView.separated(
             itemCount: title.length,
             itemBuilder: (context, index) => RoutineCard(
+              mode: "my_routine",
               title: title[index],
             ),
             separatorBuilder: (context, index) => Gaps.v12,

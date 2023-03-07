@@ -3,18 +3,27 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:minigym/constants/gaps.dart';
 import 'package:minigym/constants/sizes.dart';
+import 'package:minigym/features/authentication/login_screen.dart';
+import 'package:minigym/features/authentication/username_screen.dart';
 import 'package:minigym/features/authentication/widgets/auth_button.dart';
 import 'package:minigym/generated/l10n.dart';
 
 class SignupScreen extends StatelessWidget {
+  static const routeName = "signup_screen";
+  static const routeURL = "/";
   const SignupScreen({super.key});
 
   void _onLoginTap(BuildContext context) async {
-    context.pushNamed("login_screen");
+    context.pushNamed(LoginScreen.routeName);
   }
 
   void _onEmailPasswordTap(BuildContext context) {
-    context.pushNamed("username_screen");
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const UsernameScreen(),
+      ),
+    );
   }
 
   @override

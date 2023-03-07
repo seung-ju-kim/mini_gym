@@ -1,18 +1,20 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:minigym/constants/gaps.dart';
 import 'package:minigym/constants/sizes.dart';
 import 'package:minigym/features/authentication/widgets/form_button.dart';
+import 'package:minigym/features/routine/views/routine_screen.dart';
 import 'package:minigym/generated/l10n.dart';
 
 class PasswordScreen extends StatefulWidget {
+  final String email;
+
   const PasswordScreen({
     super.key,
-    this.email,
+    required this.email,
   });
-
-  final email;
 
   @override
   State<PasswordScreen> createState() => _PasswordScreenState();
@@ -52,6 +54,8 @@ class _PasswordScreenState extends State<PasswordScreen> {
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: widget.email, password: _password);
+
+      context.goNamed(RoutineScreen.routeName);
     } on FirebaseAuthException catch (e) {
       if (e.code == "weak-password") {
         ScaffoldMessenger.of(context).showSnackBar(

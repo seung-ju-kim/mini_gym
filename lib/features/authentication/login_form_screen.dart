@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:minigym/constants/gaps.dart';
 import 'package:minigym/constants/sizes.dart';
 import 'package:minigym/features/authentication/widgets/form_button.dart';
+import 'package:minigym/features/routine/views/routine_screen.dart';
 import 'package:minigym/generated/l10n.dart';
 
 class LoginFormScreen extends StatefulWidget {
@@ -22,14 +23,13 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
       if (_formKey.currentState!.validate()) {
         _formKey.currentState!.save();
 
+        context.go(RoutineScreen.routeURL);
         try {
           UserCredential userCredential =
               await FirebaseAuth.instance.signInWithEmailAndPassword(
             email: formData['email']!,
             password: formData['password']!,
           );
-
-          context.pushNamed("main_screen");
         } on FirebaseAuthException catch (e) {
           if (e.code == 'user-not-found') {
             if (mounted) {

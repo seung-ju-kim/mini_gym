@@ -1,18 +1,21 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:minigym/constants/breakpoints.dart';
 import 'package:minigym/constants/sizes.dart';
+import 'package:minigym/features/authentication/signup_screen.dart';
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+class SettingScreen extends StatefulWidget {
+  static const routeName = "setting_screen";
+  static const routeURL = "/setting";
+  const SettingScreen({super.key});
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  State<SettingScreen> createState() => _SettingScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _SettingScreenState extends State<SettingScreen> {
   void _signOut() async {
-    await FirebaseAuth.instance.signOut();
+    context.goNamed(SignupScreen.routeName);
   }
 
   void _onCancelPressed() {

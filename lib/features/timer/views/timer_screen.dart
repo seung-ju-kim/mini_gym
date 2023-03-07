@@ -6,6 +6,8 @@ import 'package:minigym/constants/sizes.dart';
 import 'package:minigym/utils.dart';
 
 class TimerScreen extends StatefulWidget {
+  static const routeName = "timer_screen";
+  static const routeURL = "/timer";
   const TimerScreen({super.key});
 
   @override
@@ -198,13 +200,16 @@ class _TimerScreenState extends State<TimerScreen> {
                 decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey.withOpacity(0.3),
+                      color: isDarkMode(context)
+                          ? Colors.grey.withOpacity(0.8)
+                          : Colors.grey.withOpacity(0.3),
                       blurRadius: 5.0,
                       offset: const Offset(0, 0),
                     ),
                   ],
                   borderRadius: BorderRadius.circular(Sizes.size14),
-                  color: isDarkMode(context) ? Colors.black : Colors.white,
+                  color:
+                      isDarkMode(context) ? Colors.grey.shade800 : Colors.white,
                 ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
@@ -215,14 +220,9 @@ class _TimerScreenState extends State<TimerScreen> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Row(
-                        children: [
+                        children: const [
                           Text(
                             "세트 간 휴식 타이머",
-                            style: TextStyle(
-                              color: isDarkMode(context)
-                                  ? Colors.white
-                                  : Colors.black,
-                            ),
                           ),
                         ],
                       ),
@@ -230,15 +230,8 @@ class _TimerScreenState extends State<TimerScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
-                            format(_restSeconds),
-                            style: TextStyle(
-                              fontSize: Sizes.size28,
-                              color: isDarkMode(context)
-                                  ? Colors.white
-                                  : Colors.black87,
-                            ),
-                          ),
+                          Text(format(_restSeconds),
+                              style: Theme.of(context).textTheme.titleLarge),
                         ],
                       ),
                       Gaps.v10,

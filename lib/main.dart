@@ -2,40 +2,47 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:minigym/constants/sizes.dart';
 import 'package:minigym/firebase_options.dart';
 import 'package:minigym/generated/l10n.dart';
 import 'package:minigym/router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   // Flutter engine과 framework를 묶는 접착제를 앱을 실행하기 전에 초기화
   WidgetsFlutterBinding.ensureInitialized();
 
+  // Firebase 초기화
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  // 화면 회전 세로 고정
   await SystemChrome.setPreferredOrientations(
     [
       DeviceOrientation.portraitUp,
     ],
   );
 
-  SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle.dark,
-  );
+  // 기기 로컬 저장소 초기화
+  final preferences = await SharedPreferences.getInstance();
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
+  runApp(
+    const ProviderScope(
+      child: MiniGymApp(),
+    ),
   );
-
-  runApp(const MiniGymApp());
 }
 
-class MiniGymApp extends StatelessWidget {
+class MiniGymApp extends ConsumerWidget {
   const MiniGymApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp.router(
-      routerConfig: router,
+      routerConfig: ref.watch(routerProvider),
       debugShowCheckedModeBanner: false,
       title: 'Mini Gym',
       localizationsDelegates: const [
@@ -126,24 +133,24 @@ class MiniGymApp extends StatelessWidget {
           ),
         ),
         brightness: Brightness.dark,
-        scaffoldBackgroundColor: Colors.black,
+        scaffoldBackgroundColor: Colors.grey.shade800,
         primaryColor: const Color(0xFFF59F00),
-        appBarTheme: const AppBarTheme(
-          surfaceTintColor: Colors.black,
-          backgroundColor: Colors.black,
+        appBarTheme: AppBarTheme(
+          surfaceTintColor: Colors.grey.shade800,
+          backgroundColor: Colors.grey.shade800,
           foregroundColor: Colors.white,
           elevation: 0,
-          titleTextStyle: TextStyle(
+          titleTextStyle: const TextStyle(
             color: Colors.white,
             fontSize: Sizes.size16 + Sizes.size2,
             fontWeight: FontWeight.w600,
           ),
         ),
-        bottomAppBarTheme: const BottomAppBarTheme(
-          color: Colors.black,
+        bottomAppBarTheme: BottomAppBarTheme(
+          color: Colors.grey.shade800,
         ),
-        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          backgroundColor: Colors.black,
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: Colors.grey.shade800,
         ),
       ),
     );

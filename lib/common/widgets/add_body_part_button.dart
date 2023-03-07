@@ -31,7 +31,7 @@ class _AddBodyPartButtonState extends State<AddBodyPartButton> {
           milliseconds: 300,
         ),
         padding: const EdgeInsets.symmetric(
-          vertical: Sizes.size12,
+          vertical: Sizes.size10,
           horizontal: Sizes.size24,
         ),
         decoration: BoxDecoration(

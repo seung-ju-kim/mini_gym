@@ -1,42 +1,46 @@
 {
-    "project_info": {
-        "project_number": "157027718653",
-        "project_id": "mini-pt",
-        "storage_bucket": "mini-pt.appspot.com"
-    },
-    "client": [
-        {
-            "client_info": {
-                "mobilesdk_app_id": "1:157027718653:android:41ac2e9aa5b9358259f594",
-                "android_client_info": {
-                    "package_name": "com.example.minigym"
-                }
-            },
-            "oauth_client": [
-                {
-                    "client_id": "157027718653-cnt7tcb3kjc4vlqsg4v9npguk83ia0p6.apps.googleusercontent.com",
-                    "client_type": 3
-                }
-            ],
-            "api_key": [
-                {
-                    "current_key": "AIzaSyBKtZsOU1-xIXQXyFna-ZfT6-Zuv11X0Co"
-                }
-            ],
-            "services": {
-                "appinvite_service": {
-                    "other_platform_oauth_client": [
-                        {
-                            "client_id": "157027718653-a2g5p5hbpms48r6kukokg7fs4f9j2ukp.apps.googleusercontent.com",
-                            "client_type": 2,
-                            "ios_info": {
-                                "bundle_id": "com.example.minigym"
-                            }
-                        }
-                    ]
-                }
-            }
+  "project_info": {
+    "project_number": "157027718653",
+    "project_id": "mini-pt",
+    "storage_bucket": "mini-pt.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:157027718653:android:41ac2e9aa5b9358259f594",
+        "android_client_info": {
+          "package_name": "com.example.minigym"
         }
-    ],
-    "configuration_version": "1"
+      },
+      "oauth_client": [
+        {
+          "client_id": "157027718653-mpna54nkirjmrsqapc2kblab71av0f13.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKtZsOU1-xIXQXyFna-ZfT6-Zuv11X0Co"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "157027718653-cnt7tcb3kjc4vlqsg4v9npguk83ia0p6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "157027718653-a2g5p5hbpms48r6kukokg7fs4f9j2ukp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.minigym"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
 }

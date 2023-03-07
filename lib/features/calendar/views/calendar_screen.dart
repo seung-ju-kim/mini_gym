@@ -5,6 +5,8 @@ import 'package:minigym/constants/sizes.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class CalendarScreen extends StatefulWidget {
+  static const routeName = "calendar_screen";
+  static const routeURL = "/calendar";
   const CalendarScreen({super.key});
 
   @override
@@ -46,6 +48,12 @@ class _CalendarScreenState extends State<CalendarScreen> {
               focusedDay: DateTime.now(),
               selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
               locale: 'ko-KR',
+              daysOfWeekStyle: DaysOfWeekStyle(
+                weekdayStyle: const TextStyle(),
+                weekendStyle: TextStyle(
+                  color: Colors.red.shade300,
+                ),
+              ),
               headerStyle: HeaderStyle(
                 formatButtonVisible: false,
                 titleCentered: true,
@@ -61,15 +69,14 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 ),
               ),
               calendarStyle: CalendarStyle(
+                weekendTextStyle: const TextStyle(),
                 todayDecoration: BoxDecoration(
                   border: Border.all(
                     color: Theme.of(context).primaryColor,
                   ),
                   shape: BoxShape.circle,
                 ),
-                todayTextStyle: const TextStyle(
-                  color: Colors.black,
-                ),
+                todayTextStyle: const TextStyle(),
                 selectedDecoration: BoxDecoration(
                   color: Theme.of(context).primaryColor,
                   shape: BoxShape.circle,

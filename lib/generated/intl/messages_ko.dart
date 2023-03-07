@@ -36,7 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("로그인"),
         "loginSubtitle": MessageLookupByLibrary.simpleMessage(
             "오늘은 어떤 운동을 하셨나요? 당신의 운동을 기록하세요"),
-        "loginTitle": MessageLookupByLibrary.simpleMessage("미니짐에 로그인하세요"),
+        "loginTitle": MessageLookupByLibrary.simpleMessage("MinGym에 로그인하세요"),
         "loginWithApple": MessageLookupByLibrary.simpleMessage("Apple 로그인"),
         "loginWithEmailAndPassword":
             MessageLookupByLibrary.simpleMessage("이메일 & 비밀번호 로그인"),
@@ -54,7 +54,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("비밀번호 필수 조건:"),
         "signUpSubtitle":
             MessageLookupByLibrary.simpleMessage("프로필을 생성하여 당신의 루틴을 공유하세요"),
-        "signUpTitle": MessageLookupByLibrary.simpleMessage("미니짐에 가입하세요"),
+        "signUpTitle": MessageLookupByLibrary.simpleMessage("MiniGym에 가입하세요"),
         "signUpWithApple": MessageLookupByLibrary.simpleMessage("Apple로 계속하기"),
         "signUpWithEmailAndPassword":
             MessageLookupByLibrary.simpleMessage("이메일 & 비밀번호 회원가입"),

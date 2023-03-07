@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:minigym/constants/gaps.dart';
 import 'package:minigym/constants/sizes.dart';
-import 'package:minigym/features/main/add_exercise_screen.dart';
-import 'package:minigym/features/main/widgets/add_body_part_button.dart';
+import 'package:minigym/features/routine/views/add_exercise_screen.dart';
+import 'package:minigym/common/widgets/add_body_part_button.dart';
 
 class AddRoutineScreen extends StatefulWidget {
   const AddRoutineScreen({super.key});
